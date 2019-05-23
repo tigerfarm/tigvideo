@@ -1,0 +1,7 @@
+{
+  "name": "Video Application",
+  "description": "A sample web client using Twilio Video.",
+  "repository": "https://github.com/tigerfarm/tigvideo",
+  "logo": "http://tigerfarmpress.com/images/topImgLeft.jpg",
+  "keywords": ["php", "video", "sdk"]
+}

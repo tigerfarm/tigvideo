@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Twilio Video</title>
+        <link href="custom/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <link rel="stylesheet" href="custom/video.css">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="http://media.twiliocdn.com/sdk/js/video/releases/1.16.0/twilio-video.min.js"></script>
+        <script src="video.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="custom/pageTop.js"></script>
+        <div class="panelArea">
+
+            <div id="remote-media"></div>
+
+            <div id="controls">
+                <div id="preview">
+                    <div id="local-media"></div>
+                    <button id="button-preview">Preview My Camera</button>
+                </div>
+                <div id="room-controls">
+                    <p><input type="text" id="clientid" name="clientid" placeholder="Enter participant id"/></p>
+                    <p><input type="text" id="roomid" name="roomid" placeholder="Enter room name"/></p>
+                    <button id="button-refresh" onclick="refreshToken();">Refresh Participant Token</button>
+                    <p>
+                        <button id="button-join">Join Room</button>
+                        <button id="button-leave">Leave Room</button>
+                    </p>
+                    <p><button id="button-devices" onclick="listDevices();">List Devices</button></p>
+                    <p><button id="button-camera" onclick="toggleCamera();">Set Camera OFF</button></p>
+                    <p><button id="button-Mic" onclick="toggleMic();">Set Mic OFF</button></p>
+                </div>
+                <div id="log"></div>
+            </div>
+
+        </div>
+
+        <div style="height: 260px;"></div>
+        <script type="text/javascript" src="custom/pageBottom.js"></script>
+    </body>
+</html>
