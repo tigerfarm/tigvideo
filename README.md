@@ -1,4 +1,4 @@
-# Tiger Video Client Version 2.0
+# Video Client Version 2.0
 
 A basic Twilio Video Web Client application. Client access tokens are generated using a Twilio Function. 
 
