@@ -1,7 +1,9 @@
 <?php
-// for testing.
 
-require __DIR__ . '/twilio-php-master/Twilio/autoload.php';
+// Set the Twilio helper library directory offset.
+//  If in a subdirectory, use: '/twilio-php-master/Twilio/autoload.php'
+require __DIR__ . '../../twilio-php-master/Twilio/autoload.php';
+
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 
@@ -20,5 +22,5 @@ $token = new AccessToken($twilioAccountSid, $twilioApiKey, $twilioApiSecret, 360
 $videoGrant = new VideoGrant();
 $videoGrant->setRoom($roomName);
 $token->addGrant($videoGrant);
-?>
-Token: <?php echo $token; ?>
+
+echo $token;
