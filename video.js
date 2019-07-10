@@ -5,6 +5,8 @@ var identity = clientId;
 var theToken = "";
 
 // -----------------------------------------------------------------------------
+// Track functions
+
 var activeRoom;
 var previewTracks;
 
@@ -35,12 +37,12 @@ function detachParticipantTracks(participant) {
 }
 
 // -----------------------------------------------------------------------------
-// Successfully connected!
+// Room functions
+
 function roomJoined(room) {
-    
+
     window.room = activeRoom = room;
-    log("Joined as: " + clientId);
-    log("+ activeRoom join: " + activeRoom);
+    log("Joined as: " + clientId + ", activeRoom join: " + activeRoom);
     document.getElementById('button-join').style.display = 'none';
     document.getElementById('button-leave').style.display = 'inline';
 
@@ -56,31 +58,32 @@ function roomJoined(room) {
         var previewContainer = document.getElementById('remote-media');
         attachParticipantTracks(participant, previewContainer);
     });
-    
+
     // ----------------------------------------------------
-    // When a Participant joins the Room, log the event.
+    // Room events
+
+    // New participant
     room.on('participantConnected', function (participant) {
         log("Joining: " + participant.identity);
     });
-    // When a Participant adds a Track, attach it to the DOM.
+    // Participant Track added.
     room.on('trackAdded', function (track, participant) {
         log(participant.identity + " added track: " + track.kind);
         var previewContainer = document.getElementById('remote-media');
         attachTracks([track], previewContainer);
     });
-    // When a Participant removes a Track, detach it from the DOM.
+    // Participant Track removed.
     room.on('trackRemoved', function (track, participant) {
         log(participant.identity + " removed track: " + track.kind);
         detachTracks([track]);
     });
-    // When a Participant leaves the Room, detach its Tracks.
+    // Participant leaves the Room.
     room.on('participantDisconnected', function (participant) {
         log("Participant '" + participant.identity + "' left the room");
         detachParticipantTracks(participant);
     });
     // -------------
-    // Once the LocalParticipant leaves the room, detach the Tracks
-    // of all Participants, including that of the LocalParticipant.
+    // You leave the room.
     room.on('disconnected', function () {
         log('You have left the room: ' + roomName);
         if (previewTracks) {
@@ -94,7 +97,6 @@ function roomJoined(room) {
         document.getElementById('button-join').style.display = 'inline';
         document.getElementById('button-leave').style.display = 'none';
     });
-    // ----------------------------------------------------
 }
 
 function leaveRoomIfJoined() {
@@ -169,11 +171,10 @@ function getToken() {
         theToken = gotToken.trim();
         log("Token refreshed.");
         log("theToken: " + theToken);
-    })
-            .fail(function () {
-                log("- Error refreshing the token.");
-                quit;
-            });
+    }).fail(function () {
+        log("- Error refreshing the token.");
+        return;
+    });
 }
 function setClientId() {
     clientId = $("#clientid").val();
