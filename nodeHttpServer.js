@@ -23,6 +23,17 @@ http.createServer(function (request, response) {
         console.log("+ request.url: " + request.url + ", URI: " + uri);
 
         // ---------------------------------------------------------------------
+        if (uri === "/getTokenX.php") {
+            // For testing hardcoded tokens.
+            console.log("++ Return test token.");
+            theToken = "ey...1Q";
+            console.log('+ theToken:', theToken);
+            response.writeHead(200);
+            response.write(theToken, "binary");
+            response.end();
+            return;
+        }
+        // ---------------------------------------------------------------------
         if (uri === "/getToken.php") {
             console.log("++ Get Client token.");
             // request.url: /clientTokenGet.php?clientid=owluser
@@ -34,7 +45,7 @@ http.createServer(function (request, response) {
             if (theIndex > 0) {
                 tokenHost = request.url.substring(theIndex + theHostnameFieldname.length);
             }
-            theRequest = "https://" + tokenHost + "/tokenvideo"+ theParam;
+            theRequest = "https://" + tokenHost + "/tokenvideo" + theParam;
             console.log('+ theRequest:', theRequest);
             makeRequest(theRequest, function (theError, theResponse, theText) {
                 theResponseStatusCode = theResponse && theResponse.statusCode;
